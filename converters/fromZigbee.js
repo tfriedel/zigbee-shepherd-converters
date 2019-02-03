@@ -1430,6 +1430,7 @@ const converters = {
         type: 'attReport',
         convert: (model, msg, publish, options) => {
             const result = {};
+            console.log('thermostat_att_report, msg.data = ', msg.data);
             if (typeof msg.data.data['localTemp'] == 'number') {
                 result.local_temperature = precisionRound(msg.data.data['localTemp'], 2) / 100;
             }
@@ -1490,16 +1491,28 @@ const converters = {
         type: 'attReport',
         convert: (model, msg, publish, options) => {
             const result = {};
-            console.log(msg.data);
-            if (typeof msg.data.data[16387] == 'number') {
+            console.log('msg_data=',msg.data);
+            const cur_temp_set_point_key = 0x4003.toString(10);
+            const host_flags_key = 0x4008.toString(10);
+            const error_key = 0x4002.toString(10);
+            const trv_mode_key = 0x4000.toString(10);
+            const system_mode_key = 0x1c.toString(10);
+
+            if (typeof msg.data.data[cur_temp_set_point_key] == 'number') {
                 result.current_heating_setpoint =
-                    precisionRound(msg.data.data[16387], 2) / 100;
+                    precisionRound(msg.data.data[cur_temp_set_point_key], 2) / 100;
             }
-            if (typeof msg.data.data[16392] == 'number') {
-                result.eurotronic_system_mode = msg.data.data[16392];
+            if (typeof msg.data.data[host_flags_key] == 'number') {
+                result.eurotronic_host_flags = msg.data.data[host_flags_key];
             }
-            if (typeof msg.data.data[16386] == 'number') {
-                result.eurotronic_error = msg.data.data[16386];
+            if (typeof msg.data.data[error_key] == 'number') {
+                result.eurotronic_error = msg.data.data[error_key];
+            }
+            if (typeof msg.data.data[trv_mode_key] == 'number') {
+                result.eurotronic_trv_mode = msg.data.data[trv_mode_key];
+            }
+            if (typeof msg.data.data[system_mode_key] == 'number') {
+                result.eurotronic_system_mode = msg.data.data[system_mode_key];
             }
             return result;
         },

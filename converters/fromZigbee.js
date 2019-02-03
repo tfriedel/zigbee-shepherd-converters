@@ -1490,6 +1490,7 @@ const converters = {
         type: 'attReport',
         convert: (model, msg, publish, options) => {
             const result = {};
+            console.log(msg.data);
             if (typeof msg.data.data[16387] == 'number') {
                 result.current_heating_setpoint =
                     precisionRound(msg.data.data[16387], 2) / 100;
@@ -1498,7 +1499,7 @@ const converters = {
                 result.eurotronic_system_mode = msg.data.data[16392];
             }
             if (typeof msg.data.data[16386] == 'number') {
-                result.eurotronic_16386 = msg.data.data[16386];
+                result.eurotronic_error = msg.data.data[16386];
             }
             return result;
         },

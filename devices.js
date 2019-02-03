@@ -2305,7 +2305,7 @@ const devices = [
         toZigbee: [
             tz.thermostat_occupied_heating_setpoint, tz.thermostat_unoccupied_heating_setpoint,
             tz.thermostat_local_temperature_calibration, tz.thermostat_system_mode,
-            tz.eurotronic_system_mode, tz.eurotronic_16386, tz.thermostat_setpoint_raise_lower,
+            tz.eurotronic_system_mode, tz.eurotronic_error, tz.thermostat_setpoint_raise_lower,
             tz.thermostat_control_sequence_of_operation, tz.thermostat_remote_sensing,
         ],
         configure: (ieeeAddr, shepherd, coordinator, callback) => {

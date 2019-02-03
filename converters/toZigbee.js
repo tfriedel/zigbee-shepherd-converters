@@ -917,8 +917,8 @@ const converters = {
             }
         },
     },
-    eurotronic_16386: {
-        key: 'eurotronic_16386',
+    eurotronic_error: {
+        key: 'eurotronic_error',
         convert: (key, value, message, type, postfix) => {
             const cid = 'hvacThermostat';
             const attrId = 16386;
